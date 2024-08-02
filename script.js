@@ -20,6 +20,26 @@ function showSuccess(input) {
   formControl.className = "form-control success";
 }
 
+// check input lenght
+function checkLenght(input, min, max) {
+  if (input.value.length < min) {
+    showError(input, `must be atleast ${min} characters`);
+  } else if (input.value.length > max) {
+    showError(input, `must be atleast ${max} characters`);
+  } else {
+    showSuccess(input);
+  }
+}
+
+// Checkpasswords
+function checkPasswordsMatch(input1, input2) {
+  if (input1.value !== input2.value) {
+    showError(input2, "Passwords dont Match");
+  } else {
+    showSuccess(input2);
+  }
+}
+
 //check required fields
 function checkRequried(inputArr) {
   inputArr.forEach(function (input) {
@@ -35,4 +55,7 @@ function checkRequried(inputArr) {
 form.addEventListener("submit", function (e) {
   e.preventDefault();
   checkRequried([username, email, password, password2]);
+  checkLenght(username, 3, 15);
+  checkLenght(password, 6, 25);
+  checkPasswordsMatch(password, password2);
 });
