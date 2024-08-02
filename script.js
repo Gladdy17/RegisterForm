@@ -20,30 +20,19 @@ function showSuccess(input) {
   formControl.className = "form-control success";
 }
 
-//
+//check required fields
+function checkRequried(inputArr) {
+  inputArr.forEach(function (input) {
+    if (input.value.trim() === "") {
+      showError(input, `${input.id} is Requried`);
+    } else {
+      showSuccess(input);
+    }
+  });
+}
 
 // Eventlistners Added
 form.addEventListener("submit", function (e) {
   e.preventDefault();
-
-  if (username.value === "") {
-    showError(username, "Username is requried");
-  } else {
-    showSuccess(username);
-  }
-  if (email.value === "") {
-    showError(email, "Email is requried");
-  } else {
-    showSuccess(email);
-  }
-  if (password.value === "") {
-    showError(password, "Password is requried");
-  } else {
-    showSuccess(password);
-  }
-  if (password2.value === "") {
-    showError(password2, "Password2 is requried");
-  } else {
-    showSuccess(password2);
-  }
+  checkRequried([username, email, password, password2]);
 });
